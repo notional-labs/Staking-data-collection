@@ -21,7 +21,7 @@ let blockStop = parseInt(process.env.BLOCK_END);
 // Set of account of 
 let accountSet = new Set();
 
-let accountToBalanceMap = {};
+let accountToBalanceMap = new Map();
 
 const retryThrice = helpers.retry(3);
 
@@ -106,18 +106,19 @@ async function getBalancesOfAccountSet() {
     for (const wallet of accountSet) {
         console.log('handle wallet: ', wallet);
         await new Promise(r => setTimeout(r, 10));
-        trail = 0;
-        var promise = new Promise(async function() {
+        let trail = 0;
+        let promise = new Promise(async function() {
             while(true) {
                 try {
                     trail ++;
                     let balance = new BigNumber(await tokenContract.methods.balanceOf(wallet).call({}));
                     console.log("result: " + wallet + " - " + balance.toFixed());
-                    accountToBalanceMap[wallet] = balance;
+                    accountToBalanceMap.set(wallet, balance);
                     break;
                 } 
                 catch (error) {
-                    if (trial == 5) {
+                    console.log("error---------------------------------------------------" + trail)
+                    if (trail == 5) {
                         break;
                     }
                 } 
@@ -125,9 +126,10 @@ async function getBalancesOfAccountSet() {
         }); 
         promise.then();
     }
+    console.log("sdafasdfsdffsd")
     const sortedAccountToBalanceMap = new Map([...accountToBalanceMap.entries()].sort());
     for (const [wallet, balance] of sortedAccountToBalanceMap.entries()) {
-        await writeToResultCSV(wallet, balance);
+        await writeToResultCSV(wallet, balance.toFixed());
     }
 }
 
