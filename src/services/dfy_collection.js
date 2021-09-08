@@ -7,7 +7,7 @@ const abi = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{
 const bscWeb3 = require("../configs/blockchain/web3");
 const numberOfQueue = bscWeb3.length
 
-const resultData = 'dfy_holders_list.csv';
+const resultData = 'dfy_holders_list69.csv';
 const pathResult = `./${resultData}`;
 const helpers = require('../util/helpers');
 let util = require('util');
@@ -117,7 +117,7 @@ async function getBalancesOfAccountSet() {
                     break;
                 } 
                 catch (error) {
-                    if (trail == 5) {
+                    if (trail == 9) {
                         break;
                     }
                 } 
