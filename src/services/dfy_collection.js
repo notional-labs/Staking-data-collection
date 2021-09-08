@@ -127,7 +127,7 @@ async function getBalancesOfAccountSet() {
     }
     const sortedAccountToBalanceMap = new Map([...accountToBalanceMap.entries()].sort());
     for (const [wallet, balance] of sortedAccountToBalanceMap.entries()) {
-        await writeToResultCSV(wallet, balance.toFixed());
+        await writeToResultCSV(wallet, balance);
     }
 }
 
