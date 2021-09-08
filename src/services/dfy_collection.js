@@ -18,7 +18,7 @@ const waitFor = util.promisify(setTimeout);
 let blockStart = parseInt(process.env.BLOCK_START_DFY);
 let blockStop = parseInt(process.env.BLOCK_END);
 
-// Set of account of
+// Set of account of 
 let accountSet = new Set();
 
 let accountToBalanceMap = new Map();
@@ -37,7 +37,7 @@ async function writeToResultCSV(wallet_address, balance_amount) {
     await csvWriter.writeRecords(row);
 }
 
-// this func is for dumping the
+// this func is for dumping the 
 async function readCollectedData(path) {
 
     const readline = require("readline");
@@ -115,18 +115,16 @@ async function getBalancesOfAccountSet() {
                     console.log("result: " + wallet + " - " + balance.toFixed());
                     accountToBalanceMap.set(wallet, balance);
                     break;
-                }
+                } 
                 catch (error) {
-                    console.log("error---------------------------------------------------" + trail)
                     if (trail == 5) {
                         break;
                     }
-                }
+                } 
             }
-        });
+        }); 
         promise.then();
     }
-    console.log("sdafasdfsdffsd")
     const sortedAccountToBalanceMap = new Map([...accountToBalanceMap.entries()].sort());
     for (const [wallet, balance] of sortedAccountToBalanceMap.entries()) {
         await writeToResultCSV(wallet, balance.toFixed());
@@ -134,7 +132,7 @@ async function getBalancesOfAccountSet() {
 }
 
 async function scan() {
-    await readCollectedData('./dfy_account_holders_asof_block-10714832.csv');
+    await readCollectedData('./export-tokenholders-for-contract-0xd98560689c6e748dc37bc410b4d3096b1aa3d8c2.csv');
 
     // after running this loop we get the account set (holders list)
     while (true) {
@@ -163,7 +161,7 @@ async function scan() {
             console.error(e.message)
         }
     };
-    await getBalancesOfAccountSet();
+    getBalancesOfAccountSet();
 }
 
 scan();
