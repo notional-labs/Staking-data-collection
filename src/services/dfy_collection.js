@@ -13,6 +13,7 @@ const helpers = require('../util/helpers');
 let util = require('util');
 const { SSL_OP_EPHEMERAL_RSA } = require('constants');
 const { rejects } = require('assert');
+const { format } = require('path');
 const waitFor = util.promisify(setTimeout);
 
 let blockStart = parseInt(process.env.BLOCK_START_DFY);
@@ -125,7 +126,9 @@ async function getBalancesOfAccountSet() {
         }); 
         promise.then();
     }
+    console.log(accountToBalanceMap.size);
     const sortedAccountToBalanceMap = new Map([...accountToBalanceMap.entries()].sort());
+    console.log(sortedAccountToBalanceMap.size);
     for (const [wallet, balance] of sortedAccountToBalanceMap.entries()) {
         await writeToResultCSV(wallet, balance);
     }
@@ -161,6 +164,7 @@ async function scan() {
             console.error(e.message)
         }
     };
+    console.log(accountSet.size);
     getBalancesOfAccountSet();
 }
 
