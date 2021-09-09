@@ -17,7 +17,7 @@ added_addr_map = {}
 for i,r in stake_data.iterrows():
     addr = r[0]
 
-    ammount = 1.5 * int(r[1])/10e12 + int(r[2])/10e12
+    ammount = 1.5 * int(r[1])/10e11 + int(r[2])/10e11
     ammount = str(int(ammount))
     cmd = "digd add-genesis_account " + addr + " " + ammount + "udig\n"    
     added_addr_map[addr.lower()] = int(r[2])/10e12
@@ -27,7 +27,7 @@ for i,r in stake_data.iterrows():
 # I use iterrows there's no need for speed
 for i,r in dfy_data.iterrows():
     addr = r[0]
-    ammount = int(r[1])/10e12
+    ammount = int(r[1])/10e11
 
     if added_addr_map.get(addr) != None:
         if added_addr_map[addr] < ammount:
