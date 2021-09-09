@@ -14,6 +14,7 @@ f = open("airdrop.sh", "w")
 list_addr = stake_data.loc[:,0]
 n = 0
 added_addr_map = {} 
+sum = 0
 for i,r in stake_data.iterrows():
     addr = r[0]
 
@@ -21,6 +22,7 @@ for i,r in stake_data.iterrows():
     ammount = str(int(ammount))
     cmd = "digd add-genesis_account " + addr + " " + ammount + "udig\n"    
     added_addr_map[addr.lower()] = int(r[2])/10e11
+    sum += ammount
     f.writelines(cmd)
 
 
@@ -34,8 +36,12 @@ for i,r in dfy_data.iterrows():
             print(addr, ammount, added_addr_map[addr])
     else :
         ammount = str(int(ammount))
-        cmd = "digd add-genesis_account " + addr + " " + ammount + "udig\n"    
+        cmd = "digd add-genesis-account " + addr + " " + ammount + "udig\n"    
         f.writelines(cmd)
+        sum += ammount
+
+print(sum)
+
 
 f.close()
      
