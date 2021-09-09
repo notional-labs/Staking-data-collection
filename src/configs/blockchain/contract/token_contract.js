@@ -281,6 +281,8 @@ const abi = [
 ]
 
 const constructTokenContract = () => {
+  let blockStop = parseInt(process.env.BLOCK_END);
+  web3[0].eth.defaultBlock = blockStop;
   return new web3[0].eth.Contract(abi, process.env.DFY_CONTRACT_ADDRESS)
 }
 

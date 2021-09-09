@@ -30,10 +30,10 @@ for i,r in dfy_data.iterrows():
     ammount = int(r[1])/10e12
 
     if added_addr_map.get(addr) != None:
-        if added_addr_map[addr] != ammount:
+        if added_addr_map[addr] < ammount:
             print(addr, ammount, added_addr_map[addr])
     else :
-        ammount = str(ammount)
+        ammount = str(int(ammount))
         cmd = "digd add-genesis_account " + addr + " " + ammount + "udig\n"    
         f.writelines(cmd)
 

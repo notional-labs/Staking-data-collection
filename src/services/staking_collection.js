@@ -7,6 +7,7 @@ const abi = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{
 
 const bscWeb3 = require("../configs/blockchain/web3");
 const {tokenContract} = require("../configs/blockchain/contract");
+const web3 = require('../configs/blockchain/web3');
 const numberOfQueue = bscWeb3.length
 
 const resultData = 'collected_data.csv';
@@ -141,7 +142,6 @@ async function queryStakeData(pastEvent, stakingContract) {
         if (wallet in processedMap || errorProcessedMap.includes(wallet)) {
             return;
         }
-
         let stakingAmount = new BigNumber(0);
         let rewardAmount = new BigNumber(0);
         let balance = new BigNumber(0);
