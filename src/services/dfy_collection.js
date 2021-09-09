@@ -100,7 +100,7 @@ async function processTransferEvent(blocks, web3) {
 }
 
 async function getBalancesOfAccountSet() {
-    tokenContract = tokenContract();
+    let tokenContract = tokenContract();
     for (const wallet of accountSet) {
         console.log('handle wallet: ', wallet);
         await new Promise(r => setTimeout(r, 10));
