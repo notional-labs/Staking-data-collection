@@ -20,7 +20,7 @@ for i,r in stake_data.iterrows():
     ammount = 1.5 * int(r[1])/10e11 + int(r[2])/10e11
     ammount = str(int(ammount))
     cmd = "digd add-genesis_account " + addr + " " + ammount + "udig\n"    
-    added_addr_map[addr.lower()] = int(r[2])/10e12
+    added_addr_map[addr.lower()] = int(r[2])/10e11
     f.writelines(cmd)
 
 
