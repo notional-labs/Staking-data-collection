@@ -19,10 +19,10 @@ for i,r in stake_data.iterrows():
     addr = r[0]
 
     ammount = 1.5 * int(r[1])/10e11 + int(r[2])/10e11
+    sum += ammount
     ammount = str(int(ammount))
     cmd = "digd add-genesis_account " + addr + " " + ammount + "udig\n"    
     added_addr_map[addr.lower()] = int(r[2])/10e11
-    sum += ammount
     f.writelines(cmd)
 
 
@@ -35,10 +35,11 @@ for i,r in dfy_data.iterrows():
         if added_addr_map[addr] < ammount:
             print(addr, ammount, added_addr_map[addr])
     else :
+        sum += ammount
         ammount = str(int(ammount))
         cmd = "digd add-genesis-account " + addr + " " + ammount + "udig\n"    
         f.writelines(cmd)
-        sum += ammount
+
 
 print("total:" + str(sum) + "udig")
 print("total:" + str(sum/10e6) + "dig")
