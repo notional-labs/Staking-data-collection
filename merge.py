@@ -40,7 +40,8 @@ for i,r in dfy_data.iterrows():
         f.writelines(cmd)
         sum += ammount
 
-print(sum)
+print("total:" + str(sum) + "udig")
+print("total:" + str(sum/10e6) + "dig")
 
 
 f.close()
