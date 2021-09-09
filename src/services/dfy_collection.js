@@ -17,7 +17,7 @@ const { format } = require('path');
 const waitFor = util.promisify(setTimeout);
 
 let blockStart = parseInt(process.env.BLOCK_START_DFY);
-let blockStop = parseInt(process.env.BLOCK_END);
+let blockStop = parseInt(process.env.BLOCK_END_DFY);
 
 // Set of account of 
 let accountSet = new Set();
@@ -130,7 +130,7 @@ async function getBalancesOfAccountSet() {
     const sortedAccountToBalanceMap = new Map([...accountToBalanceMap.entries()].sort());
     console.log(sortedAccountToBalanceMap.size);
     for (const [wallet, balance] of sortedAccountToBalanceMap.entries()) {
-        await writeToResultCSV(wallet, balance);
+        await writeToResultCSV(wallet, balance.toFixed());
     }
 }
 
